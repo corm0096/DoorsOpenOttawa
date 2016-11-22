@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:map="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+                android:background="@color/backView"
+              android:layout_height="match_parent">
+
+
+    <TextView
+        android:text=""
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/detailTitle"/>
+
+    <!--<ImageView-->
+        <!--android:layout_width="150dp"-->
+        <!--android:layout_height="150dp"-->
+        <!--android:layout_below="@id/detailTitle"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:id="@+id/detailImg"-->
+        <!--/>-->
+
+    <TextView
+        android:text=""
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_below="@id/detailTitle"
+        android:id="@+id/detailDescription"/>
+
+    <!--android:layout_below="@id/detailImg"-->
+
+    <TextView
+        android:text=""
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/detailDescription"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/detailHours"/>
+
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        tools:context="com.algonquinlive.corm0096.doorsopenottawa.ShowLocation"
+        android:layout_below="@id/detailHours"
+        android:layout_alignParentStart="true"
+        android:layout_height="300dp"/>
+
+    <Button
+        android:text="Return"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/returnBtn"/>
+
+</RelativeLayout>

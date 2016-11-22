@@ -12,13 +12,14 @@ package com.algonquinlive.corm0096.doorsopenottawa.parsers;
         import java.util.List;
 
 /**
- * Parse a JSON object for a Planet.
+ * Parse a JSON object for a Building.
  *
  * //TODO: compare this parser to JSON array: https://planets-hurdleg.mybluemix.net/planets
  *
  * @author Gerald.Hurdle@AlgonquinCollege.com
  *
  * Reference: FlowerJSONParser in "Connecting Android Apps to RESTful Web Services" with David Gassner
+ * Modified for Open Buildings Ottawa by Daniel Cormier (corm0096)
  */
 public class BuildingJSONParser {
 
@@ -39,6 +40,7 @@ public class BuildingJSONParser {
                 building.setImage(obj.getString("image"));
                 building.setAddress(obj.getString("address"));
                 building.setCalendar(obj.getJSONArray("open_hours"));
+                building.setDescription(obj.getString("description"));
 
                 buildingList.add(building);
             }
