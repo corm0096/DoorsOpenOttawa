@@ -1,4 +1,4 @@
-package com.algonquinlive.corm0096.doorsopenottawa;
+package com.algonquinlive.corm0096.doorsopenottawa.model;
 
 /**
  * Created by DC on 2016-11-08.
@@ -6,6 +6,7 @@ package com.algonquinlive.corm0096.doorsopenottawa;
 
 import java.io.InputStream;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
@@ -13,12 +14,14 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.media.Image;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -46,16 +49,16 @@ import org.json.JSONObject;
      */
 public class BuildingAdapter extends ArrayAdapter<Building>
 {
-
-
     private Context context;
     private List<Building> BuildingList;
+    private ArrayList faves;
 
-    public BuildingAdapter(Context context, int resource, List<Building> objects)
+    public BuildingAdapter(Context context, int resource, List<Building> objects, ArrayList faves)
     {
         super(context, resource, objects);
         this.context = context;
         this.BuildingList = objects;
+        this.faves=faves;
     }
 
     @Override
@@ -81,9 +84,20 @@ public class BuildingAdapter extends ArrayAdapter<Building>
         Building building = BuildingList.get(position);
         TextView tv = (TextView) view.findViewById(R.id.textView);
         TextView stv = (TextView) view.findViewById(R.id.subTextView);
+        ImageView fav = (ImageView)view.findViewById(R.id.favbutton);
 
         tv.setText(building.getName());
         stv.setText(building.getDates());
+        if (faves.contains(building.getBuildingId()+""))
+        {
+            fav.setImageResource(android.R.drawable.star_big_on);
+        }
+        else
+        {
+            fav.setImageResource(android.R.drawable.star_big_off);
+        }
+
+        fav.setTag(building.getBuildingId()+"");
 
         if (building.getBitmap() != null)
         {
@@ -91,6 +105,7 @@ public class BuildingAdapter extends ArrayAdapter<Building>
             ImageView image = (ImageView) view.findViewById(R.id.imageView1);
             image.setImageBitmap(building.getBitmap());
         }
+
         else
         {
             Log.i("BUILDINGS", building.getName() + "\tfetching bitmap using AsyncTask");
@@ -138,7 +153,8 @@ public class BuildingAdapter extends ArrayAdapter<Building>
             }
             catch (Exception e)
             {
-                e.printStackTrace();
+                Log.e("File not found: ",e.getMessage());
+//                e.printStackTrace();
             }
 
             return null;
@@ -147,9 +163,12 @@ public class BuildingAdapter extends ArrayAdapter<Building>
         @Override
         protected void onPostExecute(BuildingAndView result)
         {
-            ImageView image = (ImageView) result.view.findViewById(R.id.imageView1);
-            image.setImageBitmap(result.bitmap);
-            result.building.setBitmap(result.bitmap);
+            if (result !=null)
+            {
+                ImageView image = (ImageView) result.view.findViewById(R.id.imageView1);
+                image.setImageBitmap(result.bitmap);
+                result.building.setBitmap(result.bitmap);
+            }
         }
     }
 }

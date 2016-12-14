@@ -1,10 +1,12 @@
-package com.algonquinlive.corm0096.doorsopenottawa;
+package com.algonquinlive.corm0096.doorsopenottawa.subtasks;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
+
+import com.algonquinlive.corm0096.doorsopenottawa.R;
 
 /**
  * Created by DC on 2016-11-20.

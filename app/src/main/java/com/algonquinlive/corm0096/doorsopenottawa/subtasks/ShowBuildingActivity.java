@@ -1,12 +1,16 @@
-package com.algonquinlive.corm0096.doorsopenottawa;
+package com.algonquinlive.corm0096.doorsopenottawa.subtasks;
 /*
 Show Location activity inflates a secondary view to display particulars on a building,
-using Google Maps API to locate that building on the map.
+using Google Maps API to locate that building on the map.  It also permits the user to
+"favourite" a building.
 Code by Daniel Cormier (corm0096)
 */
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.location.Geocoder;
+import android.provider.ContactsContract;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Base64;
@@ -17,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.algonquinlive.corm0096.doorsopenottawa.R;
 import com.algonquinlive.corm0096.doorsopenottawa.model.Building;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -27,17 +32,17 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.Locale;
 
-public class ShowLocation extends FragmentActivity implements OnMapReadyCallback
+public class ShowBuildingActivity extends FragmentActivity implements OnMapReadyCallback
 {
 
     private GoogleMap mMap;
     private String addr;
+    private Boolean faved;
+    private int id;
     private android.location.Geocoder mGeocoder;
     private TextView mTitle, mDates, mDesc;
     private Button mBtn;
-
-    //DC: Useful if sending/receiving byte arrays can work.
-    //private ImageView mImg;
+    private ImageView mFav;
 
 
     @Override
@@ -55,9 +60,7 @@ public class ShowLocation extends FragmentActivity implements OnMapReadyCallback
         mTitle=(TextView)findViewById(R.id.detailTitle);
         mDesc=(TextView)findViewById(R.id.detailDescription);
         mBtn=(Button)findViewById(R.id.returnBtn);
-
-//        mImg=(ImageView)findViewById(R.id.detailImg);
-//        DC: Image removed from XML.  May return later.
+        mFav=(ImageView)findViewById(R.id.favstar);
 
         Bundle bundle = getIntent().getExtras();
         if ( bundle != null )
@@ -67,17 +70,44 @@ public class ShowLocation extends FragmentActivity implements OnMapReadyCallback
             mTitle.setText(bundle.getString("title"));
             mDesc.setText(bundle.getString("details"));
             addr= bundle.getString("addr");
+            id=bundle.getInt("id");
+            faved=bundle.getBoolean("faved");
 
+            if (faved)
+            {
+                mFav.setImageResource(android.R.drawable.star_big_on);
+            }
+            else
+            {
+                mFav.setImageResource(android.R.drawable.star_big_off);
+            }
 
-// DC: Code intended to convert byte array to bmp.
-//            byte[] byteArray = getIntent().getByteArrayExtra("bmp");
-//            mImg.setImageBitmap(BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length));
+            mFav.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    faved=!faved;
+                    if (faved)
+                    {
+                        mFav.setImageResource(android.R.drawable.star_big_on);
+                    }
+                    else
+                    {
+                        mFav.setImageResource(android.R.drawable.star_big_off);
+                    }
+                }
+            });
 
             mBtn.setOnClickListener(
                     new View.OnClickListener()
                     {
                         public void onClick(View v)
                         {
+                            Intent intent=new Intent();
+                            intent.putExtra("faved",faved);
+                            intent.putExtra("id",id);
+                            setResult(Activity.RESULT_OK, intent);
                             finish();
                         }
 

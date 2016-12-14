@@ -5,4 +5,15 @@
     <string name="author">Daniel Cormier (corm0096)</string>
     <string name="action_about">About</string>
     <string name="title_activity_show_location">Map</string>
+    <string name="title">Title</string>
+    <string name="address">Address</string>
+    <string name="image">Image</string>
+    <string name="description">Description</string>
+    <string name="save">Save</string>
+    <string name="checkdel">Check to Delete</string>
+    <string name="delete">Delete</string>
+    <string name="searchbumpf">Search Building...</string>
+    <string name="search">Search</string>
+    <string name="clearsearch">Clear Search</string>
+    <string name="dosearch">Do Search</string>
 </resources>

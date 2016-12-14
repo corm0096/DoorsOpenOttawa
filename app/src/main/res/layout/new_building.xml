@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+
+
+    <TextView
+        android:text="@string/title"
+        android:layout_height="wrap_content"
+        android:id="@+id/new_title"
+        android:textAppearance="@android:style/TextAppearance.Material.Medium"
+        android:layout_width="150dp"
+        android:layout_above="@+id/new_address_input"
+        android:layout_alignParentTop="true"/>
+
+    <EditText
+        android:layout_width="230dp"
+        android:layout_toRightOf="@+id/new_title"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text=""
+        android:textAppearance="@android:style/TextAppearance.Material.Medium"
+        android:id="@+id/new_title_input"/>
+
+    <TextView
+        android:text="@string/address"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/new_address"
+        android:layout_below="@+id/new_title"
+        android:textAppearance="@android:style/TextAppearance.Material.Medium"
+        android:layout_above="@+id/new_image_input"/>
+
+    <EditText
+        android:layout_width="230dp"
+        android:layout_toRightOf="@+id/new_address"
+        android:layout_below="@+id/new_title_input"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text=""
+        android:textAppearance="@android:style/TextAppearance.Material.Medium"
+        android:id="@+id/new_address_input"/>
+
+    <EditText
+        android:layout_width="230dp"
+        android:layout_toRightOf="@+id/new_image"
+        android:layout_below="@+id/new_address_input"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text=""
+        android:textAppearance="@android:style/TextAppearance.Material.Medium"
+        android:id="@+id/new_image_input"/>
+
+    <TextView
+        android:text="@string/description"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/new_description"
+        android:layout_below="@+id/new_image"
+        android:textAppearance="@android:style/TextAppearance.Material.Medium"/>
+
+    <EditText
+        android:layout_toRightOf="@+id/new_description"
+        android:layout_below="@+id/new_image_input"
+        android:layout_height="300dp"
+        android:inputType="textPersonName"
+        android:text=""
+        android:textAppearance="@android:style/TextAppearance.Material.Medium"
+        android:id="@+id/new_description_input"
+        android:layout_width="230dp"/>
+
+    <TextView
+        android:text="@string/image"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/new_image"
+        android:textAppearance="@android:style/TextAppearance.Material.Medium"
+        android:layout_below="@+id/new_address"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/new_description_input"/>
+
+    <Button
+        android:text="@string/save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/new_cancel"
+        android:layout_alignEnd="@+id/new_description_input"
+        android:layout_marginEnd="42dp"
+        android:id="@+id/new_save"/>
+
+    <Button
+        android:text="@android:string/cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:id="@+id/new_cancel"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="28dp"/>
+</RelativeLayout>
